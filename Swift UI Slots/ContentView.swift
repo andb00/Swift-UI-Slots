@@ -122,6 +122,7 @@ struct ContentView: View
                             .font(.footnote)
                         
                     }
+                    .disabled(credits < betAmount)
                     VStack
                     {
                         Button(action: {
@@ -139,6 +140,7 @@ struct ContentView: View
                             .padding([.leading, .trailing], 30)
                             .background(.pink)
                             .cornerRadius(20)
+                            .disabled(credits <= 0)
                         })
                         
                             Text("\(maxSpinBetAmount) Credits")
@@ -146,10 +148,53 @@ struct ContentView: View
                             .font(.footnote)
                         
                     }
+                    .disabled(credits < betAmount)
                 }
                 
                 
                 Spacer()
+            }
+        }
+        .overlay {
+            if credits <= 0 {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.black.opacity(0.7))
+                        .frame(width: 200, height: 100)
+                    
+                    VStack {
+                        if #available(iOS 16.0, *) {
+                            Text("Game Over")
+                                .font(.largeTitle)
+                                .foregroundStyle(Gradient(colors: [.white, .yellow]))
+                                .bold()
+                                .padding(.bottom)
+                        } else {
+                            // Fallback on earlier versions
+                            Text("Game Over")
+                                .font(.largeTitle)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .padding(.bottom)
+                        }
+                        
+                        Button {
+                            credits = 100
+                        }label: {
+                            if #available(iOS 16.0, *) {
+                                Text("Play Again")
+                                    .font(.headline)
+                                    .foregroundStyle(Gradient(colors: [.yellow, .white, .orange]))
+                            } else {
+                                // Fallback on earlier versions
+                                Text("Play Again")
+                                    .font(.headline)
+                                    .foregroundStyle(.yellow)
+                            }
+                        }
+                    }
+                        
+                }
             }
         }
     }
