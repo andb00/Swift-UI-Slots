@@ -10,11 +10,12 @@ import SwiftUI
 struct ContentView: View
 {
     
-    @State private var credits = 10000
+    @State private var credits = 100
     @State private var symbols = ["apple", "star", "cherry"]
     @State private var numbers = Array(repeating: 0, count: 9)
     @State private var backgrounds = Array(repeating: Color.white, count: 9)
-    private var betAmount = 5
+    private var betAmount = 25
+    private var maxSpinBetAmount = 50
     
     var body: some View
     {
@@ -140,7 +141,7 @@ struct ContentView: View
                             .cornerRadius(20)
                         })
                         
-                            Text("\(betAmount) Credits")
+                            Text("\(maxSpinBetAmount) Credits")
                             .padding(.top, 10)
                             .font(.footnote)
                         
