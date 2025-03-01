@@ -116,6 +116,7 @@ struct ContentView: View
                             .background(.pink)
                             .cornerRadius(20)
                         })
+                        .opacity(credits < betAmount ? 0.5 : 1)
                         
                             Text("\(betAmount) Credits")
                             .padding(.top, 10)
@@ -140,8 +141,9 @@ struct ContentView: View
                             .padding([.leading, .trailing], 30)
                             .background(.pink)
                             .cornerRadius(20)
-                            .disabled(credits <= 0)
+                            .disabled(credits < betAmount)
                         })
+                        .opacity(credits < betAmount ? 0.5 : 1)
                         
                             Text("\(maxSpinBetAmount) Credits")
                             .padding(.top, 10)
